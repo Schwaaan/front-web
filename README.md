@@ -9,5 +9,5 @@ Esse projeto foi desenvolvido para testar minha habilidade com ReactJs
     Após instalar as dependências execute o seguinte comando `npm start`, esse comando irá iniciar o projeto! 
     
 Você deve se certificar que o back-end está rodando.
-Caso não esteja rodando você deve baixa-lo e seguir sua documentação, aqui está a url do projeto:
+Caso não esteja rodando você deve baixa-lo e seguir sua documentação, aqui está a url do projeto:<br>
    URL : <a href=“https://github.com/Schwaaan/be-web“>https://github.com/Schwaaan/be-web</a>
