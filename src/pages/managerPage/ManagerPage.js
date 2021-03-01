@@ -4,30 +4,27 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import TurnedInIcon from "@material-ui/icons/TurnedIn";
 import axios from "axios";
 
-function handleClick(e) {
-  e.preventDefault();
-  console.log("Ok");
-  return alert("teste");
-}
-
 function removePassword(e) {
-  return axios
-    .delete(`https://spring-java-test123.herokuapp.com/v1/passwords`)
-    .then((res) => {
-      if ((res.status = 200)) {
-        return alert("Senhas Removidas com sucesso");
-      }
-    });
+  return axios.delete(`http://localhost:8070/v1/passwords`).then((res) => {
+    if (res.status === 200) {
+      alert("Senhas Removidas com sucesso");
+    }
+  });
 }
 
 function callPassword(e) {
   return axios
-    .put(`https://spring-java-test123.herokuapp.com/v1/passwords/calls`)
+    .put(`http://localhost:8070/v1/passwords/calls`)
     .then((res) => {
-      if ((res.status = 200)) {
+      console.log(res);
+      if (res.status === 200) {
         console.log(res.data);
-        return alert("Senha chamada com sucesso :" + res.data.value);
+        alert("Senha chamada com sucesso :" + res.data.value);
       }
+    })
+    .catch((error) => {
+      console.log(error.message);
+      alert("Nenhuma senha para ser chamada");
     });
 }
 

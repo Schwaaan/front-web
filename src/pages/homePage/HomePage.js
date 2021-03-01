@@ -4,22 +4,16 @@ import TurnedInIcon from "@material-ui/icons/TurnedIn";
 import TableComponent from "../../components/TableComponent";
 import axios from "axios";
 
-function handleClick(e) {
-  e.preventDefault();
-  console.log("Ok");
-  return alert("teste");
-}
-
 function createPasswordPreferencial(type) {
   let json = {
     type: "PREFERENCIAL",
     status: "PENDING",
   };
-  return axios
-    .post(`https://spring-java-test123.herokuapp.com/v1/passwords`, json)
-    .then((res) => {
-      console.log(res);
-    });
+
+  return axios.post(`http://localhost:8070/v1/passwords`, json).then((res) => {
+    console.log(res);
+    alert("Sua senha é " + res.data.value);
+  });
 }
 
 function createPasswordNormal(type) {
@@ -27,18 +21,18 @@ function createPasswordNormal(type) {
     type: "NORMAL",
     status: "PENDING",
   };
-  return axios
-    .post(`https://spring-java-test123.herokuapp.com/v1/passwords`, json)
-    .then((res) => {
-      console.log(res);
-    });
+  return axios.post(`http://localhost:8070/v1/passwords`, json).then((res) => {
+    console.log(res);
+    alert("Sua senha é " + res.data.value);
+  });
 }
 
 export default function HomePage() {
   return (
     <Fragment>
       <ButtonComponent
-        text="Gerar nova senha Normal"
+        color="primary"
+        text="Gerar nova senha"
         icon={<TurnedInIcon />}
         function={createPasswordNormal}
         style={{
@@ -46,7 +40,8 @@ export default function HomePage() {
         }}
       />
       <ButtonComponent
-        text="Gerar nova Preferencial"
+        color="primary"
+        text="Gerar nova Senha Preferencial"
         icon={<TurnedInIcon />}
         function={createPasswordPreferencial}
         style={{

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -16,26 +16,26 @@ const useStyles = makeStyles({
   },
 });
 
-function getPasswordCalling(e) {
-  return axios
-    .get(`https://spring-java-test123.herokuapp.com/v1/passwords`)
-    .then((res) => {
-      console.log(res.data.value);
-      createData(res.data.value);
-      setTimeout(this.getPasswordCalling, 1000 * 60);
-    });
-}
-
-function createData(data) {
-  return { data };
-}
-
-const data = createData("Frozen yoghurt", 159, 6.0, 24, 4.0);
-
-const data1 = createData(getPasswordCalling());
-
-export default function TableComponent(props) {
+export default function TableComponent() {
   const classes = useStyles();
+
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setInterval(getPasswordCalling, 3000);
+  }, []);
+
+  function getPasswordCalling() {
+    return axios
+      .get(`http://localhost:8070/v1/passwords/callings`)
+      .then((res) => {
+        console.log(res.data);
+        setValue(res.data.value);
+      })
+      .catch((e) => {
+        setValue("Nenhuma senha sendo chamada");
+      });
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -46,13 +46,13 @@ export default function TableComponent(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow key={data1.data}>
+          <TableRow key={"test"}>
             <TableCell
               component="th"
               scope="row"
               style={{ textAlign: "center" }}
             >
-              {data1.data}
+              {value ? value : "Nenhuma senha sendo chamada"}
             </TableCell>
           </TableRow>
         </TableBody>
